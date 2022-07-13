@@ -1,0 +1,99 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>CSE 564 Hw1</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-deep_purple.min.css" />
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="src/app.js"></script>
+    </head>
+    <body>
+         <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">CSE 564 Assignment 1</span>
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="#" onclick="drawGenres()"><i class="mdl-color-text--white material-icons" role="presentation">Genres</i></a>
+            <a class="mdl-navigation__link" href="#" onclick="drawRevenue()" ><i class="mdl-color-text--white material-icons" role="presentation">Revenue</i></a>
+            <a class="mdl-navigation__link" href="#" onclick="drawVoteAverage()"><i class="mdl-color-text--white material-icons" role="presentation">Rating</i></a>
+            <a class="mdl-navigation__link" href="#"onclick="drawPopularity()"><i class="mdl-color-text--white material-icons" role="presentation">Popularity</i></a>
+          </nav>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--pink mdl-color-text--pink">
+        <header class="demo-drawer-header"></header>
+        <nav class="demo-navigation mdl-navigation mdl-color--pink">
+          <a class="mdl-navigation__link" href="#" onclick="drawBudget()"><i class="mdl-color-text--white material-icons" role="presentation">Budget</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawIsAdult()"><i class="mdl-color-text--white material-icons" role="presentation">Adult</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawOriginalLanguage()"><i class="mdl-color-text--white material-icons" role="presentation">Original Language</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawLanguage()"><i class="mdl-color-text--white material-icons" role="presentation">Available Languages</i></a>
+          <a class="mdl-navigation__link" href="#" onclick ="drawIsCollection()"><i class="mdl-color-text--white material-icons" role="presentation">IsCollection</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawCompanies()"><i class="mdl-color-text--white material-icons" role="presentation">Production Company</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawProductionCountries()"><i class="mdl-color-text--white material-icons" role="presentation">Production Country</i></a>
+          <a class="mdl-navigation__link" href="#" onclick ="drawReleaseDate()"><i class="mdl-color-text--white material-icons" role="presentation">Release Date</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawRuntime()"><i class="mdl-color-text--white material-icons" role="presentation">Runtime</i></a>
+          <a class="mdl-navigation__link" href="#" onclick ="drawStatus()"><i class="mdl-color-text--white material-icons" role="presentation">Status</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="drawVoteCount()"><i class="mdl-color-text--white material-icons" role="presentation">Vote Count</i></a>
+          <a class="mdl-navigation__link" href="#" onclick="setup()"><i class="mdl-color-text--white material-icons" role="presentation">Compare Features</i></a>
+        </nav>
+      </div>
+    
+      <main class="mdl-layout__content mdl-color--pink-50">
+        <h1 class="H1"></h1>
+        <div id="main_graphs"></div>
+        <div class="radio_buttons" id="radio_buttons">
+          <div ></div>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="0" checked onchange="swap()">
+            <span class="mdl-radio__label">Feature on X axis  </span>
+          </label>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="1" onchange="swap()">
+            <span class="mdl-radio__label"> Feature on Y axis</span>
+          </label>
+        </div>
+        <div class="radio_buttons2" id="scatter">
+          <label for="feature"> Feature for </label>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="r2_option-1">
+            <input type="radio" id="r2_option-1" class="mdl-radio__button" name="options2" value="0" checked onchange="getaxis()">
+            <span class="mdl-radio__label">X axis  </span>
+          </label>
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="r2_option-2">
+            <input type="radio" id="r2_option-2" class="mdl-radio__button" name="options2" value="1" onchange="getaxis()">
+            <span class="mdl-radio__label">Y axis</span>
+          </label>
+          <label> is </label>
+          <select name="features" id="features" onchange="getFeature()">
+            <option value="none">Select a Feature</option>
+            <option value="genres">Genres</option>
+            <option value="revenue">Revenue</option>
+            <option value="vote_average">Rating</option>
+            <option value="popularity">Popularity</option>
+            <option value="budget">Budget</option>
+            <option value="adult">IsAdult</option>
+            <option value="original_language">Original Language</option>
+            <option value="available_language">Available Language</option>
+            <option value="isCollection">IsCollection</option>
+            <option value="production_companies">Production Companies</option>
+            <option value="production_countries">Production Countries</option>
+            <!-- <option value="release_date">Release Date</option> -->
+            <option value="runtime">Runtime</option>
+            <option value="status">Status</option>
+            <option value="vote_count">Vote Count</option>
+          </select>
+        </div>
+      </main>
+
+    </div>
+    <script  src="src/barchart.js"></script>
+    <script  src="src/histogram.js"></script>
+    <script src="src/scatterplot.js"></script>
+    </body>
+</html>
